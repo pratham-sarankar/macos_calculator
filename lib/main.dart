@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
@@ -7,8 +9,10 @@ import 'app/routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Window.initialize();
-  await Window.setEffect(effect: WindowEffect.transparent);
+  if (Platform.isMacOS) {
+    await Window.initialize();
+    await Window.setEffect(effect: WindowEffect.acrylic);
+  }
   runApp(
     GetMaterialApp(
       title: "Application",
